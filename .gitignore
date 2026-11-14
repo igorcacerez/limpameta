@@ -1,4 +1,7 @@
 __pycache__/
 *.pyc
-erro.log
+build/
+dist/
+*.spec
 *_limpo*
+.pytest_cache/

@@ -1,98 +1,174 @@
-# 🧹 LimpaMeta
+<div align="center">
 
-**Veja o que está escondido nas suas fotos e vídeos — e remova.**
+<img src="src/limpameta/assets/icon.png" width="96" alt="Ícone do LimpaMeta">
 
-Toda foto e todo vídeo carrega *metadados* invisíveis: onde você estava (GPS), qual celular/câmera usou, data e hora exatas, nome do autor, programa de edição e mais. Ao compartilhar um arquivo, você pode estar entregando tudo isso sem saber.
+# LimpaMeta
 
-O **LimpaMeta** é um app de desktop para Windows que **mostra todos esses dados**, deixa você **escolher o que apagar** (ou apagar tudo) e **cria uma cópia limpa** do arquivo. O original nunca é alterado.
+**Veja o que suas fotos e vídeos revelam sobre você e remova antes de compartilhar.**
 
-![Tela principal](docs/02-foto.png)
+[![Baixar para Windows](https://img.shields.io/badge/Baixar%20para%20Windows-instalador-5B8CFF?style=for-the-badge&logo=windows)](https://github.com/igorcacerez/limpameta/releases/latest)
 
-## ✨ O que ele faz
+![Versão](https://img.shields.io/github/v/release/igorcacerez/limpameta?label=vers%C3%A3o)
+![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-green)
+![Plataforma](https://img.shields.io/badge/Windows-10%20%7C%2011-blue)
 
-- 🔍 **Identifica** os metadados de fotos (EXIF, GPS, XMP, textos, perfil de cor) e vídeos (tags do arquivo e das trilhas, capas embutidas, capítulos).
-- 🗂️ **Organiza por categoria**: 📍 Localização · 📱 Dispositivo e software · 🕒 Datas e horas · 👤 Autoria e textos · 🎨 Perfil de cor · ⚙️ Técnico.
-- ⚠️ **Avisa** quando o arquivo revela localização (linhas em laranja).
-- ☑️ **Remoção seletiva**: marque só o que quer apagar, ou limpe tudo de uma vez.
-- 📦 **Vários arquivos** de uma vez, inclusive pastas inteiras, com arrastar e soltar.
-- 🛡️ **Seguro**: grava `nome_limpo.ext` ao lado do original, sem tocar nele.
-- ⚡ **Vídeos sem recodificar**: a limpeza copia o vídeo como está, então é rápida e sem perda de qualidade.
-- 🖼️ **JPG sem perder qualidade extra**: é regravado preservando a qualidade original.
+</div>
 
-## 📋 Formatos suportados
+![LimpaMeta mostrando os metadados de uma foto](docs/02-foto.png)
 
-| Tipo | Formatos |
+## Por que isso importa
+
+Toda foto tirada no celular carrega dados invisíveis, os **metadados**. Muitas vezes eles incluem:
+
+- 📍 as **coordenadas exatas de GPS** de onde a foto foi tirada (sua casa, a escola dos seus filhos);
+- 📱 a **marca, o modelo e às vezes o número de série** do aparelho;
+- 🕒 a **data e a hora** exatas;
+- 👤 o **nome do autor**, comentários e até uma **miniatura da foto original** antes de você recortá-la.
+
+Quando você envia o arquivo original por e-mail, Drive, WhatsApp como documento, marketplaces ou fóruns, esses dados vão junto.
+
+O **LimpaMeta** mostra tudo isso de forma clara, deixa você escolher o que apagar e cria uma **cópia limpa**. O arquivo original nunca é alterado e nada sai do seu computador.
+
+## Recursos
+
+| | |
 |---|---|
-| Fotos | JPG/JPEG, PNG, WebP, TIFF (via Pillow); HEIC, BMP, GIF, AVIF (via ffmpeg) |
-| Vídeos | MP4, MOV, MKV, AVI, M4V, WebM, 3GP, MTS, WMV, FLV |
+| 🔍 **Análise completa** | EXIF, GPS, XMP, IPTC, comentários, perfil de cor, miniaturas embutidas, dados extras após a imagem, tags de vídeo, telemetria (GoPro/iPhone), capas e capítulos. |
+| 🗂️ **Organizado por risco** | Os campos são agrupados em Localização, Aparelho, Datas, Autoria, Perfil de cor e Técnicos. Cada arquivo recebe uma nota de risco: alto, médio ou baixo. |
+| ☑️ **Você escolhe** | Remova tudo, só o que é pessoal (**Só privacidade**) ou marque campo a campo. |
+| 🖼️ **Sem perda de qualidade** | JPG, PNG e WebP são limpos editando só os blocos de metadados. Os pixels ficam **idênticos** e os testes automáticos comprovam isso. |
+| 🎞️ **Vídeos sem recodificar** | MP4, MOV, MKV e outros são remontados com `-c copy`. É rápido e não perde qualidade. |
+| ✅ **Verificação automática** | Depois de limpar, o LimpaMeta relê a cópia e confirma que nenhum dado pessoal ficou para trás. |
+| 📦 **Em lote** | Arraste pastas inteiras e limpe tudo de uma vez. |
+| 🗺️ **Ver no mapa** | Veja exatamente qual local a foto estava revelando. |
+| 🔒 **100% local** | Nenhum arquivo é enviado para a internet. |
 
-## 🚀 Instalação (Windows)
+## Instalação
 
-**Pré-requisitos**
+1. Baixe o **`LimpaMeta-Setup-x.y.z.exe`** na página de [Releases](https://github.com/igorcacerez/limpameta/releases/latest).
+2. Abra o instalador e avance as telas. Não precisa ser administrador.
+3. Pronto: o LimpaMeta aparece no **Menu Iniciar**, na **Área de Trabalho** e no menu **Enviar para** do Explorador de Arquivos (clique com o botão direito numa foto, depois *Enviar para → LimpaMeta*).
 
-- [Python 3.10+](https://www.python.org/downloads/)
-- [ffmpeg](https://ffmpeg.org/) para vídeos: `winget install Gyan.FFmpeg`
+> Prefere não instalar? Baixe o `LimpaMeta-x.y.z-portable.zip`, extraia e rode o `LimpaMeta.exe`.
 
-**Instalar**
+**Vídeos** precisam do [FFmpeg](https://ffmpeg.org/), que é gratuito. Se ele não estiver instalado, o próprio LimpaMeta mostra um botão **Instalar FFmpeg**. Fotos funcionam sem ele.
 
-```powershell
-git clone https://github.com/igorcacerez/limpameta.git
-cd limpameta
-powershell -ExecutionPolicy Bypass -File install.ps1
-```
+> O Windows SmartScreen pode avisar que o app é de um "editor desconhecido", porque o instalador não tem assinatura digital paga. Clique em **Mais informações → Executar assim mesmo**. O código está todo aqui para quem quiser conferir ou compilar.
 
-O script instala as dependências (Pillow e tkinterdnd2), copia o app para `%LOCALAPPDATA%\LimpaMeta` e cria atalhos na **Área de Trabalho** e no **Menu Iniciar**.
+## Como usar
 
-Prefere rodar sem instalar? `pip install -r requirements.txt` e depois `python limpameta.pyw`.
+### 1. Adicione os arquivos
 
-## 📖 Como usar
+Arraste fotos, vídeos ou pastas inteiras para a janela, ou clique em **Escolher arquivos**.
 
-### 1. Adicione seus arquivos
+![Tela inicial](docs/01-inicio.png)
 
-Clique em **+ Arquivos** ou **+ Pasta**, ou arraste fotos e vídeos para a janela. Um ⚠ ao lado do nome indica que há dados de localização.
+### 2. Veja o que cada arquivo revela
 
-![Tela inicial](docs/01-vazio.png)
+À esquerda, cada arquivo mostra uma nota de risco: **Alto** (tem localização), **Médio** (aparelho, autor ou datas), **Baixo** (só dados técnicos) ou **Sem dados**.
 
-### 2. Veja o que foi encontrado
+Ao selecionar um arquivo, os metadados aparecem agrupados por categoria. A localização fica destacada em vermelho, e **Ver no mapa** mostra o ponto exato.
 
-Clique em um arquivo da lista. Os metadados aparecem agrupados por categoria, e tudo que revela **onde você esteve** fica em laranja.
+![Foto com localização, aparelho e datas](docs/02-foto.png)
 
-![Foto com metadados](docs/02-foto.png)
-
-Vídeos funcionam do mesmo jeito (título, local, data de criação, encoder…):
+Vídeos funcionam do mesmo jeito. Os campos mostram de qual trilha vêm (vídeo ou áudio):
 
 ![Vídeo com metadados](docs/03-video.png)
 
 ### 3. Escolha o que remover
 
-Clique numa linha para marcar ☑ ou desmarcar ☐. Clicar no título de um grupo marca/desmarca o grupo inteiro. **Marcar tudo** e **Desmarcar tudo** ficam no topo. Por padrão tudo vem marcado.
+- **Tudo**: remove todos os metadados (padrão).
+- **Só privacidade**: remove localização, aparelho, datas e autoria, e mantém o perfil de cor e os dados técnicos.
+- **Nada**: desmarca tudo, para você escolher campo a campo.
 
-No exemplo, só a localização está marcada; modelo da câmera e datas serão mantidos:
+Clique em qualquer linha para marcar ou desmarcar. Clicar no título de um grupo marca o grupo inteiro. Use **Filtrar campos…** para achar algo específico.
 
-![Seleção](docs/04-selecao.png)
+![Modo "Só privacidade"](docs/04-privacidade.png)
 
-### 4. Limpe
+### 4. Crie a cópia limpa
 
-- **Limpar os marcados**: apaga só os campos marcados do arquivo atual.
-- **Limpar TUDO (todos os arquivos)**: remove todos os metadados de todos os arquivos da lista.
+- **Criar cópia limpa** (ou `Ctrl+Enter`): limpa o arquivo selecionado.
+- **Limpar todos**: limpa todos os arquivos da lista, cada um com as opções marcadas nele.
 
-Quando termina, aparece a confirmação em verde e o botão **Abrir pasta**. A cópia é salva como `nome_limpo.ext` (ou `nome_limpo2.ext` se já existir).
+A cópia é salva como `nome_limpo.ext`, ao lado do original ou na pasta que você escolher em **Salvar cópias em**. Ao terminar, o LimpaMeta confirma o resultado e oferece **Mostrar na pasta**, **Abrir** e **Analisar cópia** (para você ver com seus próprios olhos que ela está limpa).
 
-![Pronto](docs/05-pronto.png)
+![Cópia limpa criada e verificada](docs/05-pronto.png)
 
-## ⚙️ Como funciona por dentro
+### Atalhos
 
-- **Fotos**: o [Pillow](https://python-pillow.org/) lê e reescreve o EXIF (incluindo os blocos de GPS e Interop), XMP, textos e perfil de cor.
-- **Vídeos**: o `ffprobe` lista as tags e o `ffmpeg` gera a cópia com `-map_metadata -1 -c copy` (limpeza total) ou zerando só as tags escolhidas.
-- **Interface**: Tkinter com tema escuro; `tkinterdnd2` para arrastar e soltar.
-- Arquivo único de ~500 linhas: [`limpameta.pyw`](limpameta.pyw).
+| Tecla | Ação |
+|---|---|
+| `Ctrl+O` | Adicionar arquivos |
+| `Ctrl+Enter` | Criar cópia limpa do arquivo selecionado |
+| `Delete` | Remover o arquivo selecionado da lista |
+| Botão direito | Copiar valor, mostrar na pasta, abrir |
 
-## ⚠️ Limitações
+## Formatos suportados
 
-- Alguns campos puramente técnicos de vídeos MP4 (como `major_brand` e `handler_name`) são recriados pelo próprio formato e não identificam você.
-- Se um arquivo traz identificação *dentro da imagem ou do áudio* (rostos, vozes, marcas d'água), o LimpaMeta não remove: ele trata apenas metadados.
-- Testado no Windows 11. Em outros sistemas pode funcionar, mas o instalador é só para Windows.
+| Tipo | Formatos | Como é limpo |
+|---|---|---|
+| Fotos | **JPG, PNG, WebP** | Sem recompressão: remove ou reescreve só os blocos de metadados |
+| Fotos | TIFF, GIF, BMP | Regravado sem perdas (formatos sem compressão com perda) |
+| Fotos | HEIC, HEIF, AVIF | Regravado em qualidade alta (95). O app avisa quando isso acontece |
+| Vídeos | MP4, MOV, M4V, MKV, WebM, AVI, 3GP, MTS, M2TS, WMV, FLV | Remontado pelo FFmpeg sem recodificar |
 
-## 📄 Licença
+## Perguntas frequentes
 
-[MIT](LICENSE)
+**O LimpaMeta altera meu arquivo original?**
+Não. Ele sempre cria uma cópia nova (`_limpo`). Se já existir uma, ele numera (`_limpo2`, `_limpo3`…).
+
+**A foto perde qualidade?**
+Em JPG, PNG e WebP, não: a imagem comprimida é copiada byte a byte. Só HEIC/AVIF são recomprimidos (em qualidade 95), porque não há como editar os metadados desses formatos sem regravar.
+
+**Por que alguns campos "Técnicos" continuam no vídeo?**
+Campos como `major_brand` e `handler_name` fazem parte da estrutura do formato MP4/MOV e são recriados em qualquer arquivo. Eles não identificam você. A verificação automática só considera localização, aparelho, datas e autoria.
+
+**O que o LimpaMeta não remove?**
+Ele trata **metadados**. Informações que estão *dentro* da imagem ou do som (rostos, placas, reflexos, vozes, marcas d'água) continuam lá.
+
+**Onde ficam os registros de erro?**
+Em `%LOCALAPPDATA%\LimpaMeta\logs`. Também dá para abrir pelo botão ⓘ → **Abrir registros**.
+
+## Para desenvolvedores
+
+Requisitos: Python 3.10+, e FFmpeg para os testes de vídeo.
+
+```bash
+git clone https://github.com/igorcacerez/limpameta.git
+cd limpameta
+pip install -r requirements-dev.txt
+python limpameta_app.py   # roda o app
+pytest                    # roda os testes
+```
+
+Para gerar o instalador (precisa do [Inno Setup 6](https://jrsoftware.org/isinfo.php): `winget install JRSoftware.InnoSetup`):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File build.ps1
+```
+
+O build roda os testes, empacota com PyInstaller, abre e fecha o `.exe` para validar, e gera `dist\LimpaMeta-Setup-x.y.z.exe` e o `.zip` portátil.
+
+### Estrutura
+
+```
+src/limpameta/
+  core.py      leitura e limpeza de metadados (sem interface; testável)
+  ui.py        interface em PySide6 (Qt)
+  assets/      ícone
+tests/         testes automáticos (JPG, PNG, WebP, HEIC, GIF, MP4, MOV, MKV)
+installer/     script do Inno Setup
+tools/         gerador do ícone e das capturas de tela do README
+build.ps1      build completo: testes, .exe, instalador e zip
+```
+
+### Como a limpeza funciona
+
+- **JPEG**: o arquivo é dividido em segmentos. APP1 (EXIF/XMP), APP13 (IPTC), APP2 (ICC/MPF), COM e outros APPn são removidos ou reescritos. O EXIF seletivo é regravado pelo Pillow. Os dados comprimidos da imagem (SOS→EOI) são copiados intactos, e dados extras depois do EOI (mapas de profundidade, HDR) são removíveis.
+- **PNG**: os chunks `tEXt`, `zTXt`, `iTXt`, `eXIf`, `tIME` e `iCCP` são removidos ou reescritos, com o CRC recalculado.
+- **WebP**: os chunks RIFF `EXIF`, `XMP ` e `ICCP` são removidos, e as flags do `VP8X` e o tamanho do RIFF são corrigidos.
+- **Vídeo**: `ffmpeg -map 0 -c copy` com `-map_metadata -1` (ou com tags específicas zeradas). Trilhas de telemetria e capas embutidas podem ser descartadas.
+
+## Licença
+
+[MIT](LICENSE). Use, modifique e distribua à vontade.
